@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BlogController;
+use App\Http\Middleware\Authenticate;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,18 +22,24 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/home', function() { 
-    return view('home'); 
-});
+Route::get('/home', [BlogController::class, 'Read']);
 Route::get('/login', function() {
     return view('login');
 });
 Route::get('/logout', function() {
     return view('logout');
 });
+
 Route::get('/signup', function() {
     return view('signup');
 });
 
+Route::get('/blog', function() {
+    return view('createBlog');
+});
+
+
+
 Route::post('/loginUser', [UserController::class, 'Login']);
 Route::post('/createUser', [UserController::class, 'Create']);
+Route::post('/createBlog', [BlogController::class, 'Create']);
