@@ -12,7 +12,10 @@
 
     <section>
         @if(session('userCreated'))
-        <b><p style='color=green'>Creaste tu usuario de manera correcta, inicia sesion para comenzar a crear blogs!</p></b><br>
+        <b style="color: green;">Creaste tu usuario de manera correcta, inicia sesion para comenzar a crear blogs!</b><br>
+        @endif
+        @if(session('badLogin'))
+        <b style="color: red;">Los datos son incorrectos!</b><br><br>
         @endif
         <form action="/loginUser" method="post">
             @csrf
