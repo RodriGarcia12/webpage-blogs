@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -11,17 +13,25 @@ class UserController extends Controller
         $u = new User();
 
         $u -> name = $request -> post('name');
-        $u -> surnname = $request -> post('surname');
+        $u -> surname = $request -> post('surname');
         $u -> email = $request -> post('email');
         $u -> password = Hash::make($request -> post('password'));
 
         $u -> save();
 
-        return redirect('/')->with('userCreated', true);
+        return redirect('/login')->with('userCreated', true);
     }
 
-    public function Read(Request $request){
+    public function Login(Request $request){
+        $login = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
+        if(!Auth::attempt($login))
+            return redirect('/login')->with('userLogin', false);
+
+        return view('/home');
     }
 
     public function Update(Request $request){
