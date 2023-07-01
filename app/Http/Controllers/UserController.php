@@ -29,9 +29,11 @@ class UserController extends Controller
         ]);
 
         if(!Auth::attempt($login))
-            return redirect('/login')->with('userLogin', false);
-
-        return view('/home');
+            return redirect('/login')->with('badLogin', true);
+        
+        return view('/home')->with('goodLogin', true);
+        
+            
     }
 
     public function Update(Request $request){
