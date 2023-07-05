@@ -23,17 +23,13 @@ class UserController extends Controller
     }
 
     public function Login(Request $request){
-        $login = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+        $login = $request->only([
+            'email', 'password'
         ]);
-
         if(!Auth::attempt($login))
             return redirect('/login')->with('badLogin', true);
         
-        return view('/home')->with('goodLogin', true);
-        
-            
+        return redirect('/')->with('goodLogin', true);            
     }
 
     public function Update(Request $request){
@@ -42,5 +38,10 @@ class UserController extends Controller
 
     public function Delete(Request $request, $id){
 
+    }
+
+    public function Logout(Request $request){
+        Auth::logout();
+        return redirect('/');
     }
 }
