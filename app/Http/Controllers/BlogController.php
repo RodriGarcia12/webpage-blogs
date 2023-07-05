@@ -15,15 +15,13 @@ class BlogController extends Controller
         
         $b -> save();
 
-        return redirect('/home')->with('blogCreated', true);
+        return redirect('/')->with('blogCreated', true);
     }
 
     public function Read(Request $request){
         $b = Blog::all();
 
-        return view('home',[
-            'blogs' => $b
-        ]);
+        return view('home',['blogs' => $b]);
     }
 
     public function Update(Request $request){
