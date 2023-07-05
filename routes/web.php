@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BlogController;
-use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\Autenticacion;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,13 +22,11 @@ Route::get('/', function () {
 });
 */
 
-Route::get('/home', [BlogController::class, 'Read']);
+Route::get('/', [BlogController::class, 'Read']);
 Route::get('/login', function() {
     return view('login');
 });
-Route::get('/logout', function() {
-    return view('logout');
-});
+Route::get('/logout', [UserController::class, 'Logout'])->middleware(Autenticacion::class);;
 
 Route::get('/signup', function() {
     return view('signup');
