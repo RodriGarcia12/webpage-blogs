@@ -6,7 +6,6 @@
     <a href="/">Inicio</a>
 @if(Auth::check())
     <a href="/logout">Cerrar sesion</a>
-    <a href="/config">Perfil</a>
     <a href="/blog">Publicar</a>
 @else
     <a href="/login">Iniciar sesion</a>

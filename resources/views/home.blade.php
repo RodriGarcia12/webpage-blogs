@@ -19,9 +19,14 @@
     <section>
         @foreach($blogs as $blog)
             <h4>{{ $blog -> title }}</h4>
+            <b style="color: grey;">Escrito por: {{ $blog -> author }}</b>
             <blockquote>{{ $blog -> text }}</blockquote>
+            <b style="color: grey;">{{ $blog -> created_at }}</b>
+            <a href="/update/{{ $blog -> id }}">Modificar</a>
+            <a href="/delete/{{ $blog -> id}}">Eliminar</a>
             <hr>
         @endforeach
     </section>
+    {{ $blogs->links() }}
 </body>
 </html>
