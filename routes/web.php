@@ -26,7 +26,7 @@ Route::get('/', [BlogController::class, 'Read']);
 Route::get('/login', function() {
     return view('login');
 });
-Route::get('/logout', [UserController::class, 'Logout'])->middleware(Autenticacion::class);;
+Route::get('/logout', [UserController::class, 'Logout'])->middleware(Autenticacion::class);
 
 Route::get('/signup', function() {
     return view('signup');
@@ -36,8 +36,12 @@ Route::get('/blog', function() {
     return view('createBlog');
 });
 
-
+Route::get('/update/{d}', function() {
+    return view('update');
+});
+Route::get('/delete/{d}', [BlogController::class, 'Delete']);
 
 Route::post('/loginUser', [UserController::class, 'Login']);
 Route::post('/createUser', [UserController::class, 'Create']);
-Route::post('/createBlog', [BlogController::class, 'Create']);
+Route::post('/createBlog', [BlogController::class, 'Create'])->middleware(Autenticacion::class);
+Route::post('/updateBlog', [BlogController::class, 'Update']);
